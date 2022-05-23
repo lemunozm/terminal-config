@@ -1,0 +1,9 @@
+[user]
+    email = lemunozm@gmail.com
+    name = lemunozm
+[pull]
+	ff = only
+[fetch]
+    prune = true
+[core]
+    editor = nvim
