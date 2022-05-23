@@ -17,5 +17,5 @@ Tools and configuration to set up a functional **mouse-free terminal environment
 ## How to configure?
 1. Install all the tools.
 1. Install the *SourceCodePro* font.
-1. Use the `make_symbolic_links.sh` script to install the links in the required places to make it works.
-1. Write `:PlugInstall` after open vim.
+1. Use the `make_symbolic_links.sh` script to install the links to the configurations in the required places to make it works.
+1. Write `:PlugInstall` after open vim to install all plugins.
