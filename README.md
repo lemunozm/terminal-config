@@ -1,7 +1,7 @@
 # terminal-config
 Tools and configuration to set up a functional **mouse-free terminal environment**
 
-Tools:
+## Tools:
 - [oh-my-zsh](https://ohmyz.sh/): An easier way to configure your `zsh`.
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k): The best way of configure your prompt.
 - [alacritty](https://alacritty.org/): A multiplatform terminal configurable by a config file, perfect to setup the same configuration among different machines.
@@ -13,3 +13,9 @@ Tools:
 - [ranger](https://github.com/ranger/ranger): Your file navigator in the terminal based on vim hotkeys.
 - [git-foresta](https://github.com/takaaki-kasai/git-foresta): A prettier `git log` in the terminal.
 - [exa](https://the.exa.website/): A prettier `ls` and `tree` built in rust.
+
+## How to configure?
+1. Install all the tools.
+1. Install the *SourceCodePro* font.
+1. Use the `make_symbolic_links.sh` script to install the links in the required places to make it works.
+1. Write `:PlugInstall` after open vim.
