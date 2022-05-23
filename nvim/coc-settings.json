@@ -1,0 +1,27 @@
+{
+    "languageserver": {
+      "haskell": {
+        "command": "haskell-language-server-wrapper",
+        "args": ["--lsp"],
+        "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+        "filetypes": ["haskell", "lhaskell"],
+        "initializationOptions": {
+          "languageServerHaskell": {
+            "hlintOn": true,
+            "maxNumberOfProblems": 10,
+            "completionSnippetsOn": true,
+            "formattingProvider": "ormolu"
+          }
+        }
+      }
+    },
+    "rust-analyzer.diagnostics.enable": false,
+    "rust-analyzer.inlayHints.typeHints.enable": false,
+    "rust-analyzer.completion.postfix.enable": false,
+    "rust-analyzer.inlayHints.chainingHints.enable": false,
+    "clangd.path": "/home/luis/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
+    "coc.preferences.formatOnSaveFiletypes": [ "dart", "haskell" ],
+    "flutter.lsp.initialization.closingLabels": true,
+    "diagnostic.virtualText": true,
+    "codeLens.enable": true
+}
