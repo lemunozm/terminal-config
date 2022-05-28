@@ -114,8 +114,12 @@ VI_MODE_SET_CURSOR=true
 
 # Base aliases
 alias gitf="git-foresta --all --style=10 | less -ERSX"
-alias tree="tree --dirsfirst"
+
 alias exa="exa --group-directories-first"
+alias ls="exa"
+alias la="exa -la"
+alias ll="exa -l"
+alias tree="exa --tree"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
