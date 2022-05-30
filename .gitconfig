@@ -7,3 +7,4 @@
     prune = true
 [core]
     editor = nvim
+	pager = less -x1,5
