@@ -131,7 +131,7 @@ autocmd FileType html,pug,javascript,css,sass,vue,html.handlebars,dart,yaml,json
 "-------------------------------------------------
 " # fzf
 nnoremap <C-S> :FZF<CR>
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'   "Use ag instead of grep
+let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore-dir target'   "Use ag instead of grep
 
 " Search the current word and save it in the history
 noremap <leader>s :let cmd = "Rg <C-R><C-W>" <bar> :call histadd("cmd", cmd) <bar> :execute cmd<CR>
