@@ -126,6 +126,8 @@ alias la="exa -la"
 alias ll="exa -l"
 alias tree="exa --tree"
 
+defaults write .GlobalPreferences com.apple.mouse.scaling -1
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
