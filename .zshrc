@@ -97,6 +97,8 @@ VI_MODE_SET_CURSOR=true
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+export GPG_TTY='/dev/ttys001'
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -128,4 +130,4 @@ alias tree="exa --tree"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export GPG_TTY=$(tty)
+
