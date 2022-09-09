@@ -20,6 +20,7 @@
     "rust-analyzer.completion.postfix.enable": false,
     "rust-analyzer.inlayHints.chainingHints.enable": false,
     "rust-analyzer.rustfmt.extraArgs": [ "+nightly" ],
+    "rust-analyzer.cargo.features": "all",
     "clangd.path": "/home/luis/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
     "coc.preferences.formatOnSaveFiletypes": [ "dart", "haskell" ],
     "flutter.lsp.initialization.closingLabels": true,
