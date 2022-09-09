@@ -30,6 +30,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } "python
 
 " Utilities
 Plug 'mattn/webapi-vim' "Used by :RustPlay
@@ -199,6 +200,10 @@ let g:mkdp_auto_close = 0
 " # rust.vim
 let g:rustfmt_autosave = 1
 autocmd Filetype rust map <F8> :RustTest <CR>
+
+"-------------------------------------------------
+" # semshi.vim
+let g:semshi#mark_selected_nodes = 0
 
 "-------------------------------------------------
 " # coc.nvim
