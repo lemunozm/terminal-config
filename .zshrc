@@ -133,3 +133,13 @@ defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -f "/Users/luis/.ghcup/env" ] && source "/Users/luis/.ghcup/env" # ghcup-env
+
+export PATH="/opt/homebrew/opt/llvm@12/bin:$PATH"
