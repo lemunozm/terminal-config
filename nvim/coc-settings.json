@@ -24,6 +24,8 @@
     "clangd.path": "/home/luis/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
     "coc.preferences.formatOnSaveFiletypes": [ "dart", "haskell" ],
     "flutter.lsp.initialization.closingLabels": true,
-    "diagnostic.virtualText": false,
-    "codeLens.enable": false
+    "diagnostic.virtualText": true,
+    "codeLens.enable": true,
+    "codeLens.position": "eol",
+    "codeLens.separator": "▶"
 }
