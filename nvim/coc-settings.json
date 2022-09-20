@@ -10,7 +10,7 @@
             "hlintOn": true,
             "maxNumberOfProblems": 10,
             "completionSnippetsOn": true,
-            "formattingProvider": "ormolu"
+            "formattingProvider": "brittany"
           }
         }
       }
