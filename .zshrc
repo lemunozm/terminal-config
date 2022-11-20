@@ -142,5 +142,7 @@ if [ -f '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/
 if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f "/Users/luis/.ghcup/env" ] && source "/Users/luis/.ghcup/env" # ghcup-env
+export PATH="/.cabal/bin:$PATH"
 
 export PATH="/opt/homebrew/opt/llvm@12/bin:$PATH"
+eval "$(direnv hook bash)"

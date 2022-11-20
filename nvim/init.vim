@@ -31,6 +31,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } "python
+Plug 'LnL7/vim-nix'
 
 " Utilities
 Plug 'mattn/webapi-vim' "Used by :RustPlay
