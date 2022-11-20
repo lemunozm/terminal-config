@@ -1,2 +1,5 @@
 [net]
 git-fetch-with-cli = true
+
+#[build]
+#rustc-wrapper = "/opt/homebrew/bin/sccache"
