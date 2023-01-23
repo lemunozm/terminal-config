@@ -48,7 +48,7 @@ call plug#end()
 " Sets
 set number                        "Show the line numbers
 set signcolumn=auto:2             "Show two kind of symbols per line
-set relativenumber                "Show relative numbers in the line number side.
+"set relativenumber                "Show relative numbers in the line number side.
 set expandtab                     "Convert tab to space
 set tabstop=4                     "Number of space write by a tab
 set shiftwidth=4                  "Number of identation spaces (automatic identantion read this)

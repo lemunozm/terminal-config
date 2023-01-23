@@ -135,6 +135,7 @@ alias la="exa -la"
 alias ll="exa -l"
 alias tree="exa --tree"
 alias ghci="TERM=dumb ghci"
+alias cabal-ghci="TERM=dumb cabal repl"
 
 defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
