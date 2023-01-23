@@ -14,6 +14,15 @@ export ZSH="$HOME/.oh-my-zsh"
 # Internal compdump files in zsh cache folder
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
+# Haskell
+export PATH="/Users/luis/.cabal/bin:$PATH"
+
+# llvm
+export PATH="/opt/homebrew/opt/llvm@12/bin:$PATH"
+
+# Flutter
+export PATH="/Users/luis/Repos/flutter/bin:$PATH"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -142,7 +151,4 @@ if [ -f '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/
 if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f "/Users/luis/.ghcup/env" ] && source "/Users/luis/.ghcup/env" # ghcup-env
-export PATH="/.cabal/bin:$PATH"
-
-export PATH="/opt/homebrew/opt/llvm@12/bin:$PATH"
 eval "$(direnv hook bash)"
