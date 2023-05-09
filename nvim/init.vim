@@ -32,6 +32,8 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } "python
 Plug 'LnL7/vim-nix'
+Plug 'purescript-contrib/purescript-vim'
+Plug 'vmchale/dhall-vim'
 
 " Utilities
 Plug 'mattn/webapi-vim' "Used by :RustPlay
@@ -200,6 +202,7 @@ let g:mkdp_auto_close = 0
 "-------------------------------------------------
 " # rust.vim
 let g:rustfmt_autosave = 1
+let g:rustfmt_command = 'rustfmt --edition=2018'
 autocmd Filetype rust map <F8> :RustTest <CR>
 
 "-------------------------------------------------
