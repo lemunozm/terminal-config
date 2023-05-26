@@ -127,7 +127,8 @@ fi
 # For a full list of active aliases, run `alias`.
 
 # Base aliases
-alias gitf="git-foresta --all --style=10 | less -ERSX"
+alias gitf="git-foresta --style=10 | less -ERSX"
+alias gitfa="git-foresta --all --style=10 | less -ERSX"
 
 alias exa="exa --group-directories-first"
 alias ls="exa"
