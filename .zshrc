@@ -138,7 +138,11 @@ alias tree="exa --tree"
 alias ghci="TERM=dumb ghci"
 alias cabal-ghci="TERM=dumb cabal repl"
 
+# Avoid acceleration for mouse
 defaults write .GlobalPreferences com.apple.mouse.scaling -1
+
+# Avoid generating .DS_Store files on Mac
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
