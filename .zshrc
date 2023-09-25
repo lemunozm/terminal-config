@@ -158,3 +158,10 @@ if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/
 
 [ -f "/Users/luis/.ghcup/env" ] && source "/Users/luis/.ghcup/env" # ghcup-env
 eval "$(direnv hook bash)"
+
+# bun completions
+[ -s "/Users/luis/.bun/_bun" ] && source "/Users/luis/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
