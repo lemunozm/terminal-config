@@ -149,7 +149,6 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 

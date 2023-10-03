@@ -34,6 +34,8 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } "python
 Plug 'LnL7/vim-nix'
 Plug 'purescript-contrib/purescript-vim'
 Plug 'vmchale/dhall-vim'
+Plug 'edwinb/idris2-vim'
+Plug 'vmchale/ipkg-vim' "idris2 package files
 
 " Utilities
 Plug 'mattn/webapi-vim' "Used by :RustPlay
@@ -77,6 +79,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 "Leader key as space
 let mapleader = "\<space>"
+let maplocalleader = "\º"
 
 " Remove mappings (force to use vim keys)
 noremap <Up> <NOP>
@@ -208,6 +211,9 @@ autocmd Filetype rust map <F8> :RustTest <CR>
 "-------------------------------------------------
 " # semshi.vim
 let g:semshi#mark_selected_nodes = 0
+
+"-------------------------------------------------
+" # idris2-nvim
 
 "-------------------------------------------------
 " # coc.nvim

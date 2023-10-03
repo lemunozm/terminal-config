@@ -253,6 +253,47 @@ hi def link elmDelimiter Operator
 hi def link elmBraces Operator
 hi def link elmCase Typedef
 
+" Idris2
+syn keyword idrisBlockKeyword parameters mutual using
+
+hi def link idrisDeprecated Error
+hi def link idrisIdentifier HaskellIdentifier
+hi def link idrisImport HaskellKeyword
+hi def link idrisModule HaskellKeyword
+hi def link idrisStructure HaskellKeyword
+hi def link idrisStatement HaskellKeyword
+hi def link idrisForall HaskellKeyword
+hi def link idrisDataOpt HaskellIdentifier
+hi def link idrisDSL HaskellIdentifier
+hi def link idrisBlock Normal
+hi def link idrisBlockKeyword HaskellKeyword
+hi def link idrisAnnotation HaskellKeyword
+hi def link idrisWhere HaskellKeyword
+hi def link idrisLet HaskellKeyword
+hi def link idrisTotality HaskellKeyword
+hi def link idrisVisibility HaskellKeyword
+hi def link idrisConditional Conditional
+hi idrisPragma ctermfg=204
+hi def link idrisNumber Number
+hi def link idrisFloat Float
+hi def link idrisDelimiter Delimiter
+hi def link idrisInfix Delimiter
+hi def link idrisOperators Operator
+hi def link idrisType haskellType
+hi def link idrisDocComment Comment
+hi def link idrisLineComment Comment
+hi def link idrisBlockComment Comment
+hi def link idrisTodo Todo
+hi def link idrisMetaVar Macro
+hi def link idrisString String
+hi def link idrisChar String
+hi def link idrisBacktick Operator
+
+" Idris2 package file
+hi packageName ctermfg=135
+hi ipkgString ctermfg=229
+hi ipkgKeyword ctermfg=220
+
 " HTML
 hi htmlArg ctermfg=147
 hi htmlEvent ctermfg=147
