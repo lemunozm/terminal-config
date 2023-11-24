@@ -137,6 +137,7 @@ alias ll="exa -l"
 alias tree="exa --tree"
 alias ghci="TERM=dumb ghci"
 alias cabal-ghci="TERM=dumb cabal repl"
+alias neoclean="rm -rf target-neovim"
 
 # Avoid acceleration for mouse
 defaults write .GlobalPreferences com.apple.mouse.scaling -1
@@ -164,3 +165,6 @@ eval "$(direnv hook bash)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Idris2
+export PATH="$HOME/.pack/bin:$PATH"
