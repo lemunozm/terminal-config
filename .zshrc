@@ -23,6 +23,9 @@ export PATH="/opt/homebrew/opt/llvm@12/bin:$PATH"
 # Flutter
 export PATH="/Users/luis/Repos/flutter/bin:$PATH"
 
+# Idris2
+export PATH="$HOME/.pack/bin:$PATH"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -149,6 +152,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS='--multi'
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc'; fi
@@ -165,6 +169,3 @@ eval "$(direnv hook bash)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Idris2
-export PATH="$HOME/.pack/bin:$PATH"

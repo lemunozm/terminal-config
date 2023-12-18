@@ -138,6 +138,7 @@ autocmd FileType html,pug,javascript,css,sass,vue,html.handlebars,dart,yaml,json
 "-------------------------------------------------
 " # fzf
 nnoremap <C-S> :FZF<CR>
+
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -g "" --ignore-dir target --ignore-dir .git'   "Use ag instead of grep
 
 " Search the current word and save it in the history
