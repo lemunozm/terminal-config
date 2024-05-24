@@ -226,17 +226,19 @@ let g:coc_global_extensions = ['coc-json', 'coc-rust-analyzer', 'coc-cmake', 'co
 autocmd Filetype rust hi clear CocFadeOut
 
 " Trigger completion and move down in the navigation
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+"inoremap <silent><expr> <Tab>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<Tab>" :
+"      \ coc#refresh()
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Move up/down in the navigation
-inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Navigate diagnostic mappings
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
