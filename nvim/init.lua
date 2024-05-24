@@ -33,8 +33,12 @@ require("lazy").setup(
             height = 0.95,
             width = 0.9,
             preview = {
-              hidden = "hidden",
+              layout = "vertical",
+              vertical = "down:60%",
             },
+          },
+          fzf_opts = {
+            ["--layout"] = "default",
           }
         })
       end
@@ -174,8 +178,9 @@ require("lazy").setup(
         vim.keymap.set("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
         vim.keymap.set("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
 
-        vim.keymap.set("n", "<C-r>", "<Plug>(coc-range-select)", {silent = true})
-        vim.keymap.set("x", "<C-r>", "<Plug>(coc-range-select)", {silent = true})
+        -- Choose keys that not overlap
+        --vim.keymap.set("n", "<C-s>", "<Plug>(coc-range-select)", {silent = true})
+        --vim.keymap.set("x", "<C-s>", "<Plug>(coc-range-select)", {silent = true})
 
         vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
         vim.api.nvim_create_user_command("Fold", "call CocAction('fold', <f-args>)", {nargs = '?'})
@@ -230,7 +235,19 @@ require("lazy").setup(
           custom_highlights = function(colors)
             -- For ref: https://github.com/catppuccin/nvim/blob/main/lua/catppuccin/groups/syntax.lua
             return {
+               Search = { fg = "#ffdf5f", style = { "underline" }, bg = colors.base},
+               CurSearch = { fg = "#ffff00", style = { "underline", "bold" }, bg = colors.base },
                SpecialComment = { link = "Comment" },
+               Type = { fg = colors.blue },
+               idrisType = { fg = colors.blue },
+               Function = { fg = colors.yellow },
+               Identifier = { fg = "#bbc4fe" },
+               Keyword = { fg = colors.mauve },
+               Operator = { fg = "#ffffff" },
+               Macro = { fg = colors.teal },
+               rustSelf = { fg = colors.red },
+               PreProc = { fg = colors.flamingo },
+               Normal = { fg = "#fefefe" },
             }
           end,
           color_overrides = {
@@ -270,7 +287,7 @@ vim.opt.scrolloff = 8         -- min number of lines around your cursor (8 above
 vim.opt.updatetime = 300      -- Each time the swap file is written on disk
 
 -- Keys
-vim.keymap.set("n", "<leader>", vim.cmd.nohlsearch)
+vim.keymap.set("n", "<esc>", vim.cmd.nohlsearch)
 vim.keymap.set("i", "jj", "<esc>")
 vim.keymap.set("n", "<leader>w", ":w<cr>")
 vim.keymap.set("v", "<leader>y", "\"+y")
