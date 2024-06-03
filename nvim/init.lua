@@ -39,6 +39,7 @@ require("lazy").setup(
           },
           fzf_opts = {
             ["--layout"] = "default",
+            ["+i"] = "", -- case-sensitive match
           }
         })
       end
@@ -236,7 +237,7 @@ require("lazy").setup(
             -- For ref: https://github.com/catppuccin/nvim/blob/main/lua/catppuccin/groups/syntax.lua
             return {
                Search = { fg = "#ffdf5f", style = { "underline" }, bg = colors.base},
-               CurSearch = { fg = "#ffff00", style = { "underline", "bold" }, bg = colors.base },
+               CurSearch = { fg = "#ffdf5f", style = { "underline", "bold" }, bg = colors.base },
                SpecialComment = { link = "Comment" },
                Type = { fg = colors.blue },
                idrisType = { fg = colors.blue },
@@ -297,7 +298,6 @@ vim.keymap.set("v", "<leader>p", "\"+P")
 vim.keymap.set("n", "<leader>p", "\"+p")
 vim.keymap.set("n", "<leader>P", "\"+P")
 vim.keymap.set("v", "y", "y`]", { silent = true })
-vim.keymap.set("v", "<leader>y", "y`]", { silent = true })
 vim.keymap.set("n", "<leader><leader>", "<C-^>")
 
 -- Auto commands
