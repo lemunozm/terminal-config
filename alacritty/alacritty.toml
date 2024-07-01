@@ -1,0 +1,200 @@
+# To show the config help use either:
+# - 'man 5 alacritty'
+# check https://alacritty.org/config-alacritty.html
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "#696A66"
+blue = "#8DAED4"
+cyan = "#73E3E6"
+green = "#A9E15E"
+magenta = "#B795B5"
+red = "#E25140"
+white = "#F2F1F0"
+yellow = "#FBEB77"
+
+[colors.normal]
+black = "#222222"
+blue = "#5079AF"
+cyan = "#46A4A9"
+green = "#70A531"
+magenta = "#83678B"
+red = "#C6351C"
+white = "#DDDED9"
+yellow = "#CAAF38"
+
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+
+[cursor]
+blink_interval = 400
+
+[cursor.style]
+blinking = "Always"
+
+[font]
+size = 14.0
+
+[font.bold]
+family = "SauceCodePro Nerd Font"
+style = "Medium"
+
+[font.normal]
+family = "SauceCodePro Nerd Font"
+style = "Regular"
+
+[[keyboard.bindings]]
+chars = '\'
+key = 10
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "|"
+key = 18
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "@"
+key = "Key2"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "#"
+key = "Key3"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "~"
+key = "Key4"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "¬"
+key = "Key6"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "{"
+key = 39
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "}"
+key = 42
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "["
+key = 33
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "]"
+key = 30
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bq"
+key = "Q"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bw"
+key = "W"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bh"
+key = "H"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bj"
+key = "J"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bk"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bl"
+key = "L"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001BH"
+key = "H"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u001BJ"
+key = "J"
+mods = "Alt|SHift"
+
+[[keyboard.bindings]]
+chars = "\u001BK"
+key = "K"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u001BL"
+key = "L"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u001Bz"
+key = "Z"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bu"
+key = "U"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B-"
+key = "Minus"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bi"
+key = "I"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bt"
+key = "T"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001BQ"
+key = "Q"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u001Bn"
+key = "N"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bm"
+key = "M"
+mods = "Alt"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+multiplier = 1
+
+[window]
+option_as_alt = "Both"
+
+[window.dimensions]
+columns = 90
+lines = 30
