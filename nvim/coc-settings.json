@@ -5,9 +5,17 @@
   "rust-analyzer.inlayHints.typeHints.enable": false,
   "rust-analyzer.completion.postfix.enable": false,
   "rust-analyzer.inlayHints.chainingHints.enable": false,
-  "rust-analyzer.rustfmt.extraArgs": [ "+nightly" ],
-  "rust-analyzer.cargo.features": ["runtime-benchmarks"],
-  "rust-analyzer.check.extraArgs": ["--target-dir", "target-neovim"],
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
+  "rust-analyzer.rustfmt.extraArgs": [
+    "+nightly"
+  ],
+  //"rust-analyzer.cargo.features": [
+  //  "runtime-benchmarks"
+  //],
+  "rust-analyzer.check.extraArgs": [
+    "--target-dir",
+    "target-neovim"
+  ],
   "diagnostic.virtualText": true,
   "codeLens.enable": true,
   "codeLens.position": "eol",
@@ -18,4 +26,3 @@
     "$HOME/.rustup/**"
   ],
 }
-
