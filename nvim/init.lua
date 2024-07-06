@@ -44,6 +44,11 @@ require("lazy").setup(
         })
       end
     },
+    {
+      'nvim-telescope/telescope.nvim',
+      tag = '0.1.8',
+      dependencies = { 'nvim-lua/plenary.nvim' }
+    },
     { "nvim-lualine/lualine.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
@@ -84,8 +89,53 @@ require("lazy").setup(
         vim.g.wintabs_ui_sep_rightmost = ""
       end
     },
+    { "hrsh7th/nvim-cmp",
+      dependencies = {
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+      },
+      config = function()
+        local cmp = require("cmp")
+        local has_words_before = function()
+          unpack = unpack or table.unpack
+          local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+          return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        end
+        cmp.setup({
+          mapping = cmp.mapping.preset.insert({
+            ['<Tab>'] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                if #cmp.get_entries() == 1 then
+                  cmp.confirm({ select = true })
+                else
+                  cmp.select_next_item()
+                end
+              elseif has_words_before() then
+                cmp.complete()
+                if #cmp.get_entries() == 1 then
+                  cmp.confirm({ select = true })
+                end
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          }),
+          sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+            { name = 'path' },
+            { name = 'buffer' },
+          }),
+        })
+      end
+    },
     { "neoclide/coc.nvim",
-      --ft = {"json, "rust"},
+      ft = {"json", "rust", "c"},
       branch = "release",
       config = function()
         vim.g.coc_global_extensions = {"coc-json", "coc-rust-analyzer"}
@@ -203,8 +253,7 @@ require("lazy").setup(
 
     -- Languages
     { "rust-lang/rust.vim", ft = "rust" },
-    {
-      'mrcjkb/haskell-tools.nvim',
+    { 'mrcjkb/haskell-tools.nvim',
       ft = { "haskell" },
       version = '^3',
       config = function()
@@ -223,6 +272,50 @@ require("lazy").setup(
       dependencies = {'neovim/nvim-lspconfig', 'MunifTanjim/nui.nvim'},
       config = function()
         require('idris2').setup({})
+      end
+    },
+    {
+      'Julian/lean.nvim',
+      event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+      dependencies = {
+        'neovim/nvim-lspconfig',
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope.nvim',
+        'hrsh7th/nvim-cmp',
+      },
+      config = function()
+        local function on_attach(_, bufnr)
+          local function cmd(mode, lhs, rhs)
+            vim.keymap.set(mode, lhs, rhs, { noremap = true, buffer = true })
+          end
+
+          -- Autocomplete using the Lean language server
+          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+          -- gd in normal mode will jump to definition
+          cmd('n', 'gd', vim.lsp.buf.definition)
+          -- K in normal mode will show the definition of what's under the cursor
+          cmd('n', 'K', vim.lsp.buf.hover)
+
+          -- <leader>n will jump to the next Lean line with a diagnostic message on it
+          -- <leader>N will jump backwards
+          cmd('n', '<leader>n', function() vim.diagnostic.goto_next{popup_opts = {show_header = false}} end)
+          cmd('n', '<leader>N', function() vim.diagnostic.goto_prev{popup_opts = {show_header = false}} end)
+
+          -- <leader>K will show all diagnostics for the current line in a popup window
+          cmd('n', '<leader>K', function() vim.diagnostic.open_float(0, { scope = "line", header = false, focus = false }) end)
+
+          -- <leader>q will load all errors in the current lean file into the location list
+          -- (and then will open the location list)
+          -- see :h location-list if you don't generally use it in other vim contexts
+          cmd('n', '<leader>q', vim.diagnostic.setloclist)
+        end
+
+        require('lean').setup({
+            abbreviations = { builtin = true },
+            lsp = { on_attach = on_attach },
+            mappings = true,
+        })
       end
     },
 
