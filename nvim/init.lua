@@ -94,6 +94,9 @@ require("lazy").setup(
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
+        'hrsh7th/cmp-nvim-lsp-signature-help',
+        'hrsh7th/cmp-nvim-lua',
+        'amarakon/nvim-cmp-lua-latex-symbols',
       },
       config = function()
         local cmp = require("cmp")
@@ -130,6 +133,9 @@ require("lazy").setup(
             { name = 'nvim_lsp' },
             { name = 'path' },
             { name = 'buffer' },
+            { name = 'nvim_lsp_signature_help' },
+            { name = 'nvim_lua' },
+            { name = "lua-latex-symbols", option = { cache = true } },
           }),
         })
       end
