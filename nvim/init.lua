@@ -275,7 +275,11 @@ require("lazy").setup(
     },
     { "ShinKage/idris2-nvim",
       ft = { "idris2", "ipkg" },
-      dependencies = {'neovim/nvim-lspconfig', 'MunifTanjim/nui.nvim'},
+      dependencies = {
+        'neovim/nvim-lspconfig',
+        'MunifTanjim/nui.nvim',
+        'hrsh7th/nvim-cmp',
+      },
       config = function()
         require('idris2').setup({})
       end
