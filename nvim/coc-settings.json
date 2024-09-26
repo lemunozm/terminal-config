@@ -9,9 +9,9 @@
   "rust-analyzer.rustfmt.extraArgs": [
     "+nightly"
   ],
-  //"rust-analyzer.cargo.features": [
-  //  "runtime-benchmarks"
-  //],
+  "rust-analyzer.cargo.features": [
+    "runtime-benchmarks"
+  ],
   "rust-analyzer.check.extraArgs": [
     "--target-dir",
     "target-neovim"

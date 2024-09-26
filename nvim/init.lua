@@ -328,6 +328,8 @@ require("lazy").setup(
           -- (and then will open the location list)
           -- see :h location-list if you don't generally use it in other vim contexts
           cmd('n', '<leader>q', vim.diagnostic.setloclist)
+
+          cmd('n', '<leader>r', "<CMD>LeanRestartFile<CR>")
         end
 
         require('lean').setup({
