@@ -15,7 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 -- Required before loading lazy to mapping correctly
 vim.g.mapleader = " "
 vim.g.maplocalleader = "º"
-
 require("lazy").setup(
   {
     -- IDE
@@ -90,6 +89,7 @@ require("lazy").setup(
       end
     },
     { "hrsh7th/nvim-cmp",
+      lazy = true,
       dependencies = {
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
@@ -256,6 +256,15 @@ require("lazy").setup(
         vim.keymap.set("n", "<localleader>p", ":<C-u>CocListResume<cr>", opts)
       end
     },
+    {
+      "iamcco/markdown-preview.nvim",
+      ft = { "markdown" },
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      build = "cd app && yarn install",
+      init = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+      end,
+    },
 
     -- Languages
     { "rust-lang/rust.vim", ft = "rust" },
@@ -327,6 +336,10 @@ require("lazy").setup(
             mappings = true,
         })
       end
+    },
+    {
+      "aklt/plantuml-syntax",
+      event = { 'BufReadPre *.puml', 'BufNewFile *.puml' },
     },
 
     -- Themes
