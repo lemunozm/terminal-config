@@ -370,6 +370,7 @@ require("lazy").setup(
                rustSelf = { fg = colors.red },
                PreProc = { fg = colors.flamingo },
                Normal = { fg = "#fefefe" },
+               TabLineSel = { bg = "#555555" },
             }
           end,
           color_overrides = {
