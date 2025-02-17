@@ -141,10 +141,10 @@ require("lazy").setup(
       end
     },
     { "neoclide/coc.nvim",
-      ft = {"json", "rust", "c"},
+      ft = {"json", "rust", "c", "solidity"},
       branch = "release",
       config = function()
-        vim.g.coc_global_extensions = {"coc-json", "coc-rust-analyzer"}
+        vim.g.coc_global_extensions = {"coc-json", "coc-rust-analyzer", "@nomicfoundation/coc-solidity"}
 
         function _G.check_back_space()
             local col = vim.fn.col('.') - 1
@@ -264,6 +264,9 @@ require("lazy").setup(
       init = function()
         vim.g.mkdp_filetypes = { "markdown" }
       end,
+    },
+    { "weirongxu/plantuml-previewer.vim",
+      dependencies = { "tyru/open-browser.vim" },
     },
 
     -- Languages
@@ -419,22 +422,22 @@ vim.keymap.set("v", "y", "y`]", { silent = true })
 vim.keymap.set("n", "<leader><leader>", "<C-^>")
 
 -- Auto commands
-vim.api.nvim_create_autocmd(
-  "FileType",
-  { pattern = "html,pug,javascript,css,sass,vue,dart,yaml,json,haskell,idris,lua",
-    callback = function()
-      vim.opt_local.shiftwidth = 2
-      vim.opt_local.tabstop = 2
-    end
-  }
-)
-vim.api.nvim_create_autocmd(
-  "BufWritePre",
-  { pattern = "*",
-    callback = function()
-      local curpos = vim.api.nvim_win_get_cursor(0)
-      vim.cmd([[keeppatterns %s/\s\+$//e]])
-      vim.api.nvim_win_set_cursor(0, curpos)
-    end
-  }
-)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "html,pug,javascript,css,sass,vue,dart,yaml,json,haskell,idris,lua",
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+  end
+})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    local curpos = vim.api.nvim_win_get_cursor(0)
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    vim.api.nvim_win_set_cursor(0, curpos)
+  end
+})
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.sol",
+  command = "silent !forge fmt %"
+})

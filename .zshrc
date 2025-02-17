@@ -162,8 +162,8 @@ if [ -f '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-[ -f "/Users/luis/.ghcup/env" ] && source "/Users/luis/.ghcup/env" # ghcup-env
-eval "$(direnv hook bash)"
+#[ -f "/Users/luis/.ghcup/env" ] && source "/Users/luis/.ghcup/env" # ghcup-env
+#eval "$(direnv hook bash)"
 
 # bun completions
 [ -s "/Users/luis/.bun/_bun" ] && source "/Users/luis/.bun/_bun"

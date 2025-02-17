@@ -25,4 +25,5 @@
     "$HOME/.cargo/**",
     "$HOME/.rustup/**"
   ],
+  "@nomicfoundation/coc-solidity.telemetry": true,
 }
