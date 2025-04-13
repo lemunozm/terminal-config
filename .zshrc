@@ -171,3 +171,5 @@ if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+FOUNDRY_DISABLE_NIGHTLY_WARNING=1
