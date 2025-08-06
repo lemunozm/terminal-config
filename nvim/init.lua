@@ -410,6 +410,22 @@ require("lazy").setup(
         })
       end
     },
+    {
+      "nvim-treesitter/nvim-treesitter",
+      branch = 'master',
+      lazy = false,
+      build = ":TSUpdate",
+      config = function()
+        require'nvim-treesitter.configs'.setup {
+        ensure_installed = { "solidity" },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+      }
+      end
+    },
+
 
     -- Themes
     { "catppuccin/nvim",
@@ -443,7 +459,17 @@ require("lazy").setup(
             }
           }
         })
+
+        -- General
         vim.cmd.colorscheme("catppuccin")
+        vim.api.nvim_set_hl(0, "@type.builtin", { link = "Type" })
+
+        -- Specific: Solidity
+        vim.api.nvim_set_hl(0, "@function.solidity", { link = "@variable.parameter" })
+        vim.api.nvim_set_hl(0, "@variable.parameter.solidity", { link = "@variable", bold = true })
+        vim.api.nvim_set_hl(0, "@function.method.call.solidity", { link = "@variable", bold = true })
+        vim.api.nvim_set_hl(0, "@keyword.operator.solidity", { link = "Keyword"})
+
       end
     },
   },
@@ -488,7 +514,7 @@ vim.keymap.set("n", "<leader><leader>", "<C-^>")
 
 -- Auto commands
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "html,pug,javascript,css,sass,vue,dart,yaml,json,haskell,idris,lua",
+  pattern = "html,pug,javascript,css,sass,vue,dart,yaml,haskell,idris,lua,json",
   callback = function()
     vim.opt_local.shiftwidth = 2
     vim.opt_local.tabstop = 2

@@ -1,6 +1,6 @@
 [user]
-    email = lemunozm@gmail.com
-    name = lemunozm
+	email = lemunozm@gmail.com
+	name = lemunozm
 	signingkey = F2FFEDAB12EAF2AB
 [pull]
 	ff = only
