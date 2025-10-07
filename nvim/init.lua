@@ -209,7 +209,7 @@ require("lazy").setup(
 
         local opts = {silent = true, nowait = true}
         vim.keymap.set("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
-        vim.keymap.set("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
+        vim.keymap.set("n", "<leader>a", "<Plug>(coc-codeaction)", opts)
         vim.keymap.set("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", opts)
         vim.keymap.set("n", "<leader>as", "<Plug>(coc-codeaction-source)", opts)
         vim.keymap.set("n", "<leader>qf", "<Plug>(coc-fix-current)", opts)
@@ -514,7 +514,7 @@ vim.keymap.set("n", "<leader><leader>", "<C-^>")
 
 -- Auto commands
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "html,pug,javascript,css,sass,vue,dart,yaml,haskell,idris,lua,json",
+  pattern = "html,pug,javascript,css,sass,vue,dart,yaml,haskell,idris,lua",
   callback = function()
     vim.opt_local.shiftwidth = 2
     vim.opt_local.tabstop = 2
