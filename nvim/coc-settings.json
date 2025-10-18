@@ -1,8 +1,8 @@
 {
   "coc.preferences.formatOnSave": true,
   "suggest.noselect": true,
-  "rust-analyzer.diagnostics.enable": false,
-  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "rust-analyzer.diagnostics.enable": true,
+  "rust-analyzer.inlayHints.typeHints.enable": true,
   "rust-analyzer.completion.postfix.enable": false,
   "rust-analyzer.inlayHints.chainingHints.enable": false,
   "rust-analyzer.inlayHints.parameterHints.enable": false,

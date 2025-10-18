@@ -217,6 +217,9 @@ require("lazy").setup(
         vim.keymap.set("x", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
         vim.keymap.set("n", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
         vim.keymap.set("n", "<leader>cl", "<Plug>(coc-codelens-action)", opts)
+        vim.keymap.set("n", "<leader>t", function()
+          vim.fn.CocAction('runCommand', 'rust-analyzer.inlayHints.enable')
+        end, {silent = true, desc = "Toggle Rust inlay hints"})
 
         vim.keymap.set("x", "if", "<Plug>(coc-funcobj-i)", opts)
         vim.keymap.set("o", "if", "<Plug>(coc-funcobj-i)", opts)
@@ -423,6 +426,15 @@ require("lazy").setup(
           additional_vim_regex_highlighting = false,
         },
       }
+      end
+    },
+    {
+      "greggh/claude-code.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim", -- Required for git operations
+      },
+      config = function()
+        require("claude-code").setup()
       end
     },
 

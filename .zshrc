@@ -156,12 +156,6 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--multi'
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 #[ -f "/Users/luis/.ghcup/env" ] && source "/Users/luis/.ghcup/env" # ghcup-env
 #eval "$(direnv hook bash)"
 
@@ -173,3 +167,9 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 FOUNDRY_DISABLE_NIGHTLY_WARNING=1
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
