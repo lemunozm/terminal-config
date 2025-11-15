@@ -276,7 +276,15 @@ require("lazy").setup(
     { "rust-lang/rust.vim", ft = "rust" },
     { 'mrcjkb/haskell-tools.nvim',
       ft = { "haskell" },
-      version = '^3',
+      version = '^6',
+      dependencies = {
+        'neovim/nvim-lspconfig',
+      },
+      init = function()
+        -- Configure haskell-tools.nvim here
+        vim.g.haskell_tools = {}
+      end,
+
       config = function()
         local ht = require('haskell-tools')
         local opts = { noremap = true, silent = true, buffer = vim.api.nvim_get_current_buf(), }
@@ -286,6 +294,10 @@ require("lazy").setup(
         vim.keymap.set('n', '<leader>rr', ht.repl.toggle, opts)
         vim.keymap.set('n', '<leader>rf', function() ht.repl.toggle(vim.api.nvim_buf_get_name(0)) end, opts)
         vim.keymap.set('n', '<leader>rq', ht.repl.quit, opts)
+        vim.keymap.set("n", "gb", "<Plug>HaskellHoverActionDocs", opts)
+        vim.keymap.set("n", "gd", "<Plug>HaskellHoverActionDefinition", opts)
+        vim.keymap.set('n', '<space>a', '<Plug>HaskellHoverAction')
+
       end
     },
     { "ShinKage/idris2-nvim",
@@ -418,15 +430,13 @@ require("lazy").setup(
       branch = 'master',
       lazy = false,
       build = ":TSUpdate",
-      config = function()
-        require'nvim-treesitter.configs'.setup {
-        ensure_installed = { "solidity" },
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-      }
-      end
+      opts = {
+        ensure_installed = { "haskell", "solidity" },
+        highlight = { enable = true, additional_vim_regex_highlighting = false },
+      },
+      config = function(_, opts)
+        require'nvim-treesitter.configs'.setup(opts)
+      end,
     },
     {
       "greggh/claude-code.nvim",
@@ -437,7 +447,13 @@ require("lazy").setup(
         require("claude-code").setup()
       end
     },
-
+    {
+      "gruvw/strudel.nvim",
+      build = "npm install",
+      config = function()
+        require("strudel").setup()
+      end
+    },
 
     -- Themes
     { "catppuccin/nvim",
@@ -510,6 +526,7 @@ vim.opt.cmdheight = 1         -- Space to displaying messages
 vim.opt.shortmess:append("c") -- Don't give ins-completion-menu messages when closing files
 vim.opt.scrolloff = 8         -- min number of lines around your cursor (8 above, 8 below)
 vim.opt.updatetime = 300      -- Each time the swap file is written on disk
+vim.opt.termguicolors = true
 
 -- Keys
 vim.keymap.set("n", "<esc>", vim.cmd.nohlsearch)
@@ -543,4 +560,29 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.sol",
   command = "silent !forge fmt %"
+})
+
+--LSP config
+vim.diagnostic.config({
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+local float = { border = "rounded", source = "if_many" }
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, float)
+
+local opts = { silent = true, noremap = true }
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Line diagnostics" }))
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,   vim.tbl_extend("force", opts, { desc = "Prev diagnostic" }))
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next,   vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, vim.tbl_extend("force", opts, { desc = "Quickfix diagnostics" }))
+
+vim.o.updatetime = 200  -- CursorHold delay (ms)
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false, border = "rounded", scope = "cursor" })
+  end,
 })
