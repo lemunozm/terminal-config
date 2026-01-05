@@ -46,6 +46,12 @@ style = "Medium"
 family = "SauceCodePro Nerd Font"
 style = "Regular"
 
+# Shift+Return sends ESC+Enter (same as Option+Enter) to work in tmux
+[[keyboard.bindings]]
+chars = "\u001b\r"
+key = "Return"
+mods = "Shift"
+
 [[keyboard.bindings]]
 chars = '\'
 key = 10
