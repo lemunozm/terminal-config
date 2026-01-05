@@ -545,7 +545,7 @@ vim.keymap.set("n", "<leader><leader>", "<C-^>")
 
 -- Auto commands
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "html,pug,javascript,css,sass,vue,dart,yaml,haskell,idris,lua",
+  pattern = "html,pug,javascript,css,sass,vue,dart,yaml,haskell,idris,lua,json",
   callback = function()
     vim.opt_local.shiftwidth = 2
     vim.opt_local.tabstop = 2
