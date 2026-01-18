@@ -46,6 +46,14 @@ style = "Medium"
 family = "SauceCodePro Nerd Font"
 style = "Regular"
 
+[font.italic]
+family = "SauceCodePro Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "SauceCodePro Nerd Font"
+style = "Medium Italic"
+
 # Shift+Return sends ESC+Enter (same as Option+Enter) to work in tmux
 [[keyboard.bindings]]
 chars = "\u001b\r"
