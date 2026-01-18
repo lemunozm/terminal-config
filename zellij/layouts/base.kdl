@@ -38,4 +38,13 @@ layout {
             plugin location="status-bar"
         }
     }
+    tab name="Shell" {
+        pane split_direction="horizontal" {
+            pane
+            pane
+        }
+    }
+    tab name="Neovim" {
+        pane command="nvim"
+    }
 }
