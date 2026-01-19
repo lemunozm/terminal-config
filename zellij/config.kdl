@@ -5,6 +5,8 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Ctrl j" { WriteChars "\u{001b}[B"; }
+        bind "Ctrl k" { WriteChars "\u{001b}[A"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
