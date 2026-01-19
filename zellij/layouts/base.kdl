@@ -16,7 +16,7 @@ layout {
                 tab_normal_sync         "#[fg=#6C7086]{name}"
 
                 // formatting for the current active tab
-                tab_active              "#[fg=blue,bold]{name}#[fg=yellow,bold]{floating_indicator}"
+                tab_active              "#[fg=blue,bold]{name}"
                 tab_active_fullscreen   "#[fg=yellow,bold]{name}#[fg=yellow,bold]{fullscreen_indicator}"
                 tab_active_sync         "#[fg=green,bold]{name}#[fg=yellow,bold]{sync_indicator}"
 
@@ -26,7 +26,6 @@ layout {
                 // indicators
                 tab_sync_indicator       " "
                 tab_fullscreen_indicator " "
-                tab_floating_indicator   ""
 
                 datetime        "#[fg=#6C7086,bold] {format} "
                 datetime_format "%A, %d %b %Y %H:%M:%S"
