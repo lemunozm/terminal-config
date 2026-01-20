@@ -469,6 +469,14 @@ require("lazy").setup(
 
         -- Command to show logs
         vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
+
+        -- Automatically colorize .dump files
+        vim.api.nvim_create_autocmd("BufReadPost", {
+          pattern = "*.dump",
+          callback = function()
+            vim.g.baleia.once(vim.api.nvim_get_current_buf())
+          end,
+        })
       end,
     },
 
