@@ -458,9 +458,28 @@ require("lazy").setup(
     },
     {
       "m00qek/baleia.nvim",
-      version = "*",
+      branch = "main",
       config = function()
-        vim.g.baleia = require("baleia").setup({ })
+        -- Match Alacritty color scheme
+        local colors = {
+          [0]  = "#222222", -- black
+          [1]  = "#C6351C", -- red
+          [2]  = "#70A531", -- green
+          [3]  = "#CAAF38", -- yellow
+          [4]  = "#5079AF", -- blue
+          [5]  = "#83678B", -- magenta
+          [6]  = "#46A4A9", -- cyan
+          [7]  = "#DDDED9", -- white
+          [8]  = "#696A66", -- bright black
+          [9]  = "#E25140", -- bright red
+          [10] = "#A9E15E", -- bright green
+          [11] = "#FBEB77", -- bright yellow
+          [12] = "#8DAED4", -- bright blue
+          [13] = "#B795B5", -- bright magenta
+          [14] = "#73E3E6", -- bright cyan
+          [15] = "#F2F1F0", -- bright white
+        }
+        vim.g.baleia = require("baleia").setup({ colors = colors })
 
         -- Command to colorize the current buffer
         vim.api.nvim_create_user_command("BaleiaColorize", function()
@@ -474,7 +493,14 @@ require("lazy").setup(
         vim.api.nvim_create_autocmd("BufReadPost", {
           pattern = "*.dump",
           callback = function()
-            vim.g.baleia.once(vim.api.nvim_get_current_buf())
+            local buf = vim.api.nvim_get_current_buf()
+            local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+            for i, line in ipairs(lines) do
+              -- Replace ESC[m with ESC[0m so baleia can match reset sequences
+              lines[i] = line:gsub("\027%[m", "\027[0m")
+            end
+            vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+            vim.g.baleia.once(buf)
           end,
         })
       end,
