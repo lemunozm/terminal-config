@@ -493,14 +493,7 @@ require("lazy").setup(
         vim.api.nvim_create_autocmd("BufReadPost", {
           pattern = "*.dump",
           callback = function()
-            local buf = vim.api.nvim_get_current_buf()
-            local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-            for i, line in ipairs(lines) do
-              -- Replace ESC[m with ESC[0m so baleia can match reset sequences
-              lines[i] = line:gsub("\027%[m", "\027[0m")
-            end
-            vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-            vim.g.baleia.once(buf)
+            vim.g.baleia.once(vim.api.nvim_get_current_buf())
           end,
         })
       end,
