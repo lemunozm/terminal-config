@@ -104,6 +104,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+KEYTIMEOUT=1  # Reduce ESC delay to 10ms (value is in centiseconds)
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
 
