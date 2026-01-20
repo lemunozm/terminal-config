@@ -103,22 +103,17 @@ mods = "Alt"
 [[keyboard.bindings]]
 chars = "["
 key = 33
-mods = "Alt|Shift"
-
-[[keyboard.bindings]]
-chars = "\u001B+"
-key = 30
 mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "]"
 key = 30
-mods = "Alt|Shift"
+mods = "Alt"
 
 [[keyboard.bindings]]
-chars = "\u001B+"
-key = "NumpadAdd"
-mods = "Alt"
+chars = "\u001B]"
+key = 30
+mods = "Alt|Shift"
 
 [[keyboard.bindings]]
 chars = "\u001Bq"
