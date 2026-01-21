@@ -630,3 +630,13 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     vim.diagnostic.open_float(nil, { focus = false, border = "rounded", scope = "cursor" })
   end,
 })
+
+-- Open dumb files with no column numbers
+vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
+  pattern = "*.dump",
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = "no"
+  end,
+})
