@@ -56,7 +56,7 @@ require("lazy").setup(
             theme = "catppuccin",
           },
           sections = {
-            lualine_x = {"g:coc_status", "encoding", "fileformat", "filetype"},
+            lualine_x = {"encoding", "fileformat", "filetype"},
           }
         })
       end
@@ -89,7 +89,7 @@ require("lazy").setup(
       end
     },
     { "hrsh7th/nvim-cmp",
-      lazy = true,
+      event = { "InsertEnter", "CmdlineEnter" },
       dependencies = {
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
@@ -123,6 +123,13 @@ require("lazy").setup(
                 fallback()
               end
             end, { "i", "s" }),
+            ['<S-Tab>'] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
             ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
@@ -140,123 +147,74 @@ require("lazy").setup(
         })
       end
     },
-    { "neoclide/coc.nvim",
-      ft = {"json", "rust", "c", "solidity"},
-      branch = "release",
+    { "neovim/nvim-lspconfig",
+      lazy = false,
+      dependencies = { "hrsh7th/cmp-nvim-lsp" },
       config = function()
-        vim.g.coc_global_extensions = {"coc-json", "coc-rust-analyzer", "@nomicfoundation/coc-solidity"}
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-        function _G.check_back_space()
-            local col = vim.fn.col('.') - 1
-            return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
-        end
-
-        function _G.show_docs()
-            local cw = vim.fn.expand('<cword>')
-            if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
-                vim.api.nvim_command('h ' .. cw)
-            elseif vim.api.nvim_eval('coc#rpc#ready()') then
-                vim.fn.CocActionAsync('doHover')
-            else
-                vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
-            end
-        end
-
-        local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-        local pum_next = 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()'
-        local pum_prev = [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]]
-        local pun_confirm = [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]]
-        vim.keymap.set("i", "<TAB>", pum_next, opts)
-        vim.keymap.set("i", "<S-TAB>", pum_prev, opts)
-        vim.keymap.set("i", "<cr>", pun_confirm, opts)
-
-        vim.keymap.set("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
-        vim.keymap.set("i", "<c-space>", "coc#refresh()", {silent = true, expr = true})
-
-        vim.keymap.set("n", "[g", "<Plug>(coc-diagnostic-prev)", {silent = true})
-        vim.keymap.set("n", "]g", "<Plug>(coc-diagnostic-next)", {silent = true})
-
-        vim.keymap.set("n", "gd", "<Plug>(coc-definition)", {silent = true})
-        vim.keymap.set("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
-        vim.keymap.set("n", "gi", "<Plug>(coc-implementation)", {silent = true})
-        vim.keymap.set("n", "gr", "<Plug>(coc-references)", {silent = true})
-
-        vim.keymap.set("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
-
-        vim.keymap.set("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
-
-        vim.keymap.set("x", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
-        vim.keymap.set("n", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
-
-        vim.api.nvim_create_augroup("CocGroup", {})
-        vim.api.nvim_create_autocmd("CursorHold", {
-            group = "CocGroup",
-            command = "silent call CocActionAsync('highlight')",
-            desc = "Highlight symbol under cursor on CursorHold"
-        })
-        vim.api.nvim_create_autocmd("FileType", {
-            group = "CocGroup",
-            pattern = "typescript,json",
-            command = "setl formatexpr=CocAction('formatSelected')",
-            desc = "Setup formatexpr specified filetype(s)."
-        })
-        vim.api.nvim_create_autocmd("User", {
-            group = "CocGroup",
-            pattern = "CocJumpPlaceholder",
-            command = "call CocActionAsync('showSignatureHelp')",
-            desc = "Update signature help on jump placeholder"
+        -- LSP keybindings on attach
+        vim.api.nvim_create_autocmd("LspAttach", {
+          callback = function(args)
+            local opts = { noremap = true, silent = true, buffer = args.buf }
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+            vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+            vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
+            vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+            vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+            vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
+            vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
+            vim.keymap.set("n", "[g", vim.diagnostic.goto_prev, opts)
+            vim.keymap.set("n", "]g", vim.diagnostic.goto_next, opts)
+          end,
         })
 
-        local opts = {silent = true, nowait = true}
-        vim.keymap.set("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
-        vim.keymap.set("n", "<leader>a", "<Plug>(coc-codeaction)", opts)
-        vim.keymap.set("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", opts)
-        vim.keymap.set("n", "<leader>as", "<Plug>(coc-codeaction-source)", opts)
-        vim.keymap.set("n", "<leader>qf", "<Plug>(coc-fix-current)", opts)
-        vim.keymap.set("n", "<leader>re", "<Plug>(coc-codeaction-refactor)", { silent = true })
-        vim.keymap.set("x", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
-        vim.keymap.set("n", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
-        vim.keymap.set("n", "<leader>cl", "<Plug>(coc-codelens-action)", opts)
-        vim.keymap.set("n", "<leader>t", function()
-          vim.fn.CocAction('runCommand', 'rust-analyzer.inlayHints.enable')
-        end, {silent = true, desc = "Toggle Rust inlay hints"})
+        -- Solidity (solidity-ls - same as CoC used)
+        vim.lsp.config("solidity_ls", {
+          cmd = { "solidity-ls", "--stdio" },
+          filetypes = { "solidity" },
+          root_markers = { "foundry.toml", "hardhat.config.js", "hardhat.config.ts", "remappings.txt", ".git" },
+          capabilities = capabilities,
+          single_file_support = true,
+        })
 
-        vim.keymap.set("x", "if", "<Plug>(coc-funcobj-i)", opts)
-        vim.keymap.set("o", "if", "<Plug>(coc-funcobj-i)", opts)
-        vim.keymap.set("x", "af", "<Plug>(coc-funcobj-a)", opts)
-        vim.keymap.set("o", "af", "<Plug>(coc-funcobj-a)", opts)
-        vim.keymap.set("x", "ic", "<Plug>(coc-classobj-i)", opts)
-        vim.keymap.set("o", "ic", "<Plug>(coc-classobj-i)", opts)
-        vim.keymap.set("x", "ac", "<Plug>(coc-classobj-a)", opts)
-        vim.keymap.set("o", "ac", "<Plug>(coc-classobj-a)", opts)
+        -- Rust
+        vim.lsp.config("rust_analyzer", {
+          cmd = { "rust-analyzer" },
+          filetypes = { "rust" },
+          root_markers = { "Cargo.toml", ".git" },
+          capabilities = capabilities,
+          settings = {
+            ["rust-analyzer"] = {
+              checkOnSave = { command = "clippy" },
+              inlayHints = {
+                typeHints = { enable = true },
+                parameterHints = { enable = true },
+              },
+            },
+          },
+        })
 
-        local opts = {silent = true, nowait = true, expr = true}
-        vim.keymap.set("n", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
-        vim.keymap.set("n", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
-        vim.keymap.set("i", "<C-f>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
-        vim.keymap.set("i", "<C-b>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
-        vim.keymap.set("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
-        vim.keymap.set("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
+        -- JSON
+        vim.lsp.config("jsonls", {
+          cmd = { "vscode-json-language-server", "--stdio" },
+          filetypes = { "json", "jsonc" },
+          root_markers = { ".git" },
+          capabilities = capabilities,
+        })
 
-        -- Choose keys that not overlap
-        --vim.keymap.set("n", "<C-s>", "<Plug>(coc-range-select)", {silent = true})
-        --vim.keymap.set("x", "<C-s>", "<Plug>(coc-range-select)", {silent = true})
+        -- C/C++
+        vim.lsp.config("clangd", {
+          cmd = { "clangd" },
+          filetypes = { "c", "cpp", "objc", "objcpp" },
+          capabilities = capabilities,
+          root_markers = { "compile_commands.json", ".clangd", ".git" },
+        })
 
-        vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
-        vim.api.nvim_create_user_command("Fold", "call CocAction('fold', <f-args>)", {nargs = '?'})
-        vim.api.nvim_create_user_command("OR", "call CocActionAsync('runCommand', 'editor.action.organizeImport')", {})
-
-        vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}")
-
-        local opts = {silent = true, nowait = true}
-        vim.keymap.set("n", "<localleader>a", ":<C-u>CocList diagnostics<cr>", opts)
-        vim.keymap.set("n", "<localleader>e", ":<C-u>CocList extensions<cr>", opts)
-        vim.keymap.set("n", "<localleader>c", ":<C-u>CocList commands<cr>", opts)
-        vim.keymap.set("n", "<localleader>o", ":<C-u>CocList outline<cr>", opts)
-        vim.keymap.set("n", "<localleader>s", ":<C-u>CocList -I symbols<cr>", opts)
-        vim.keymap.set("n", "<localleader>j", ":<C-u>CocNext<cr>", opts)
-        vim.keymap.set("n", "<localleader>k", ":<C-u>CocPrev<cr>", opts)
-        vim.keymap.set("n", "<localleader>p", ":<C-u>CocListResume<cr>", opts)
+        -- Enable all configured LSP servers
+        vim.lsp.enable({ "solidity_ls", "rust_analyzer", "jsonls", "clangd" })
       end
     },
     {
