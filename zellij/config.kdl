@@ -258,6 +258,9 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
+    sessionizer location="https://github.com/cunialino/zellij-sessionizer/releases/download/v0.1.0/sessionizer.wasm" {
+        cwd "~/"
+    }
 }
 
 // Plugins to load in the background when a new session starts

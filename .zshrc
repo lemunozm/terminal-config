@@ -145,6 +145,12 @@ alias neoclean="rm -rf target-neovim"
 alias nvim9="XDG_CONFIG_HOME=$HOME/Repos/terminal-config/nvim_9 $HOME/Repos/nvim-macos/bin/nvim"
 alias packl="pack --no-prompt --log-level=build"
 
+# Zellij sessionizer
+zn() {
+  local name="${1:-${PWD##*/}}"
+  zellij pipe -p sessionizer -n sessionizer-new --args "cwd=$(pwd),name=$name"
+}
+
 # Avoid acceleration for mouse
 defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
