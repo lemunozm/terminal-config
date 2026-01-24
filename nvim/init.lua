@@ -166,8 +166,6 @@ require("lazy").setup(
             vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
             vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
             vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
-            vim.keymap.set("n", "[g", vim.diagnostic.goto_prev, opts)
-            vim.keymap.set("n", "]g", vim.diagnostic.goto_next, opts)
           end,
         })
 
@@ -231,18 +229,12 @@ require("lazy").setup(
     },
 
     -- Languages
-    { "rust-lang/rust.vim", ft = "rust" },
     { 'mrcjkb/haskell-tools.nvim',
       ft = { "haskell" },
       version = '^6',
       dependencies = {
         'neovim/nvim-lspconfig',
       },
-      init = function()
-        -- Configure haskell-tools.nvim here
-        vim.g.haskell_tools = {}
-      end,
-
       config = function()
         local ht = require('haskell-tools')
         local opts = { noremap = true, silent = true, buffer = vim.api.nvim_get_current_buf(), }
@@ -280,32 +272,8 @@ require("lazy").setup(
       },
       config = function()
         local function on_attach(_, bufnr)
-          local function cmd(mode, lhs, rhs)
-            vim.keymap.set(mode, lhs, rhs, { noremap = true, buffer = true })
-          end
-
-          -- Autocomplete using the Lean language server
-          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-          -- gd in normal mode will jump to definition
-          cmd('n', 'gd', vim.lsp.buf.definition)
-          -- K in normal mode will show the definition of what's under the cursor
-          cmd('n', 'K', vim.lsp.buf.hover)
-
-          -- <leader>n will jump to the next Lean line with a diagnostic message on it
-          -- <leader>N will jump backwards
-          cmd('n', '<leader>n', function() vim.diagnostic.goto_next{popup_opts = {show_header = false}} end)
-          cmd('n', '<leader>N', function() vim.diagnostic.goto_prev{popup_opts = {show_header = false}} end)
-
-          -- <leader>K will show all diagnostics for the current line in a popup window
-          cmd('n', '<leader>K', function() vim.diagnostic.open_float(0, { scope = "line", header = false, focus = false }) end)
-
-          -- <leader>q will load all errors in the current lean file into the location list
-          -- (and then will open the location list)
-          -- see :h location-list if you don't generally use it in other vim contexts
-          cmd('n', '<leader>q', vim.diagnostic.setloclist)
-
-          cmd('n', '<leader>r', "<CMD>LeanRestartFile<CR>")
+          -- Lean-specific keybindings (gd, K, diagnostics handled by global LspAttach)
+          vim.keymap.set('n', '<leader>r', "<CMD>LeanRestartFile<CR>", { noremap = true, buffer = bufnr })
         end
 
         require('lean').setup({
@@ -328,55 +296,8 @@ require("lazy").setup(
           'hrsh7th/nvim-cmp',
       },
       config = function()
-        local function on_attach(_, bufnr)
-          local function cmd(mode, lhs, rhs)
-            vim.keymap.set(mode, lhs, rhs, { noremap = true, buffer = true })
-          end
-
-          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-          cmd('n', 'gd', vim.lsp.buf.definition)
-          cmd('n', 'K', vim.lsp.buf.hover)
-
-          -- <leader>n will jump to the next Lean line with a diagnostic message on it
-          -- <leader>N will jump backwards
-          cmd('n', '<leader>n', function() vim.diagnostic.goto_next{popup_opts = {show_header = false}} end)
-          cmd('n', '<leader>N', function() vim.diagnostic.goto_prev{popup_opts = {show_header = false}} end)
-
-          -- <leader>K will show all diagnostics for the current line in a popup window
-          cmd('n', '<leader>K', function() vim.diagnostic.open_float(0, { scope = "line", header = false, focus = false }) end)
-
-          -- <leader>q will load all errors in the current lean file into the location list
-          -- (and then will open the location list)
-          -- see :h location-list if you don't generally use it in other vim contexts
-          cmd('n', '<leader>q', vim.diagnostic.setloclist)
-
-          --Show the message with <space>e
-          cmd('n', '<leader>e', vim.diagnostic.open_float)
-
-          -- disable virtual_text (inline) diagnostics and use floating window
-          -- format the message such that it shows source, message and
-          -- the error code.
-          vim.diagnostic.config({
-            virtual_text = false,
-            signs = true,
-            float = {
-              border = "single",
-              format = function(diagnostic)
-                return string.format(
-                  "%s (%s) [%s]",
-                  diagnostic.message,
-                  diagnostic.source,
-                  diagnostic.code or diagnostic.user_data.lsp.code
-                )
-              end,
-            },
-          })
-        end
-
         require('flutter-tools').setup({
           widget_guides = { enabled = true },
-          lsp = { on_attach = on_attach },
           dev_log = {
             open_cmd = "15split",
           },
@@ -524,10 +445,9 @@ vim.opt.hidden = true         -- Allows open tabs without safe the current one.
 vim.opt.swapfile = false      -- No generate swap files
 vim.opt.backup = false        -- Avoid creating backup files
 vim.opt.writebackup = false   -- Avoid creating backup files
-vim.opt.cmdheight = 1         -- Space to displaying messages
 vim.opt.shortmess:append("c") -- Don't give ins-completion-menu messages when closing files
 vim.opt.scrolloff = 8         -- min number of lines around your cursor (8 above, 8 below)
-vim.opt.updatetime = 300      -- Each time the swap file is written on disk
+vim.opt.updatetime = 200      -- Each time the swap file is written on disk and cursor hold delay
 vim.opt.termguicolors = true
 
 -- Keys
@@ -537,7 +457,7 @@ vim.keymap.set("n", "<leader>w", ":w<cr>")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>d", "\"+d")
 vim.keymap.set("v", "<leader>p", "\"+p")
-vim.keymap.set("v", "<leader>p", "\"+P")
+vim.keymap.set("v", "<leader>P", "\"+P")
 vim.keymap.set("n", "<leader>p", "\"+p")
 vim.keymap.set("n", "<leader>P", "\"+P")
 vim.keymap.set("v", "y", "y`]", { silent = true })
@@ -578,11 +498,10 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 local opts = { silent = true, noremap = true }
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Line diagnostics" }))
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,   vim.tbl_extend("force", opts, { desc = "Prev diagnostic" }))
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next,   vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
+vim.keymap.set("n", "<leader>n", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
+vim.keymap.set("n", "<leader>N", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "Prev diagnostic" }))
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, vim.tbl_extend("force", opts, { desc = "Quickfix diagnostics" }))
 
-vim.o.updatetime = 200  -- CursorHold delay (ms)
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
   callback = function()
     vim.diagnostic.open_float(nil, { focus = false, border = "rounded", scope = "cursor" })
