@@ -13,3 +13,5 @@ Tools and configuration to set up a functional and productive **mouse-free termi
 - [ripgrep](https://github.com/BurntSushi/ripgrep): A faster `grep` built in rust.
 - [git-foresta](https://github.com/takaaki-kasai/git-foresta): A prettier and simpler `git log` in the terminal.
 - [exa](https://the.exa.website/): A prettier `ls` and `tree` built in rust.
+- [nvimpager](https://github.com/sindrets/diffview.nvim): Use neovim as pager (instead of less)
+- [yazi](https://yazi-rs.github.io/): File explorer and management

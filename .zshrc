@@ -181,3 +181,6 @@ if [ -f '/Users/luis/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/
 if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f "/Users/luis/.ghcup/env" ] && . "/Users/luis/.ghcup/env" # ghcup-env
+
+# use nvim as pager instead of less
+export PAGER=nvimpager

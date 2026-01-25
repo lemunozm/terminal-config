@@ -1,0 +1,7 @@
+# Yazi configuration
+# https://yazi-rs.github.io/docs/configuration/yazi
+
+# Use nvimpager for syntax-highlighted previews
+[[plugin.prepend_previewers]]
+url = "*"
+run = 'piper -- nvimpager -c "$1"'
