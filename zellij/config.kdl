@@ -166,7 +166,7 @@ keybinds clear-defaults=true {
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt e" { EditScrollbackRaw; }
         bind "Alt Shift p" { ToggleGroupMarking; }
-        bind "Alt w" {
+        bind "Alt s" {
             LaunchOrFocusPlugin "session-manager" {
                 floating true
                 move_to_focused_tab true
@@ -327,6 +327,10 @@ default_layout "base"
 //   - false
 //
 pane_frames false
+
+default_floating_pane_size {
+    width "80%"
+}
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
