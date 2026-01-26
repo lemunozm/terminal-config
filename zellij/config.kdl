@@ -173,7 +173,6 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "locked"
         }
-        bind "Alt s" { WriteChars "yazi\n"; }
     }
     shared_except "locked" "renametab" "renamepane" {
         bind "Ctrl q" { Quit; }

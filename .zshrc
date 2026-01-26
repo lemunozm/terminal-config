@@ -184,3 +184,12 @@ if [ -f '/Users/luis/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/
 
 # use nvim as pager instead of less
 export PAGER=nvimpager
+
+# initialize yazi and return the path after closing it
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
