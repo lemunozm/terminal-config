@@ -27,6 +27,7 @@ require("lazy").setup(
         { "<leader>s", "<cmd>FzfLua grep_cword<cr>" },
       },
       config = function()
+        local actions = require("fzf-lua.actions")
         require("fzf-lua").setup({
           winopts = {
             height = 0.95,
@@ -39,7 +40,21 @@ require("lazy").setup(
           fzf_opts = {
             ["--layout"] = "default",
             ["+i"] = "", -- case-sensitive match
-          }
+          },
+          actions = {
+            files = {
+              ["default"] = function(selected, opts)
+                local path = require("fzf-lua.path")
+                for _, sel in ipairs(selected) do
+                  local entry = path.entry_to_file(sel, opts)
+                  vim.cmd("edit " .. vim.fn.fnameescape(entry.path))
+                  vim.fn["wintabs#init"]()
+                end
+              end,
+              ["ctrl-s"] = actions.file_split,
+              ["ctrl-v"] = actions.file_vsplit,
+            },
+          },
         })
       end
     },
