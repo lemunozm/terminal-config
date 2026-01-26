@@ -508,12 +508,13 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
   end,
 })
 
--- Open dumb files with no column numbers
+-- Open dump files with no column numbers and easy quit
 vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
   pattern = "*.dump",
   callback = function()
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
     vim.opt_local.signcolumn = "no"
+    vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true })
   end,
 })
