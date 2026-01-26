@@ -184,9 +184,9 @@ require("lazy").setup(
           end,
         })
 
-        -- Solidity (solidity-ls - same as CoC used)
+        -- Solidity (Nomic Foundation - has native Foundry support)
         vim.lsp.config("solidity_ls", {
-          cmd = { "solidity-ls", "--stdio" },
+          cmd = { "nomicfoundation-solidity-language-server", "--stdio" },
           filetypes = { "solidity" },
           root_markers = { "foundry.toml", "hardhat.config.js", "hardhat.config.ts", "remappings.txt", ".git" },
           capabilities = capabilities,
