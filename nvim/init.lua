@@ -47,7 +47,11 @@ require("lazy").setup(
                 local path = require("fzf-lua.path")
                 for _, sel in ipairs(selected) do
                   local entry = path.entry_to_file(sel, opts)
-                  vim.cmd("edit " .. vim.fn.fnameescape(entry.path))
+                  local cmd = "edit "
+                  if entry.line then
+                    cmd = cmd .. "+" .. entry.line .. " "
+                  end
+                  vim.cmd(cmd .. vim.fn.fnameescape(entry.path))
                   vim.fn["wintabs#init"]()
                 end
               end,
