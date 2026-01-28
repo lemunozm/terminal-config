@@ -105,6 +105,14 @@ require("lazy").setup(
       },
     },
     },
+    { "folke/noice.nvim",
+      event = "VeryLazy",
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+      },
+      opts = {},
+    },
     { "akinsho/git-conflict.nvim",
       version = "*",
       opts = {
@@ -568,6 +576,15 @@ vim.diagnostic.config({
 local float = { border = "rounded", source = "if_many" }
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float)
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, float)
+
+-- Allow <Esc> to close floating windows (hover docs, etc.)
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    if vim.api.nvim_win_get_config(0).relative ~= "" then
+      vim.keymap.set("n", "<Esc>", "<cmd>close<cr>", { buffer = true })
+    end
+  end,
+})
 
 local opts = { silent = true, noremap = true }
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Line diagnostics" }))
