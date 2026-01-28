@@ -38,3 +38,5 @@ vim.opt.clipboard = "unnamedplus"  -- Always use system clipboard
 vim.g.mapleader = " "
 vim.keymap.set("v", "y", '"+y')    -- Visual yank goes to clipboard
 vim.keymap.set("n", "Y", '"+yy')   -- Yank line to clipboard
+vim.keymap.set("n", "<esc>", "<cmd>q<cr>", { buffer = true })
+vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true })

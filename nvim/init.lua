@@ -109,9 +109,12 @@ require("lazy").setup(
       event = "VeryLazy",
       dependencies = {
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
       },
-      opts = {},
+      opts = {
+        notify = {
+          enabled = false,
+        },
+      },
     },
     { "akinsho/git-conflict.nvim",
       version = "*",
@@ -456,6 +459,18 @@ require("lazy").setup(
             vim.defer_fn(function() vim.bo[buf].modified = false end, 100)
           end,
         })
+
+        -- Open dump files with no column numbers and easy quit
+        vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
+          pattern = "*.dump",
+          callback = function()
+            vim.opt_local.number = false
+            vim.opt_local.relativenumber = false
+            vim.opt_local.signcolumn = "no"
+            vim.keymap.set("n", "<esc>", "<cmd>q!<cr>", { buffer = true })
+            vim.keymap.set("n", "q", "<cmd>q!<cr>", { buffer = true })
+          end,
+        })
       end,
     },
 
@@ -598,13 +613,3 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
   end,
 })
 
--- Open dump files with no column numbers and easy quit
-vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
-  pattern = "*.dump",
-  callback = function()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.opt_local.signcolumn = "no"
-    vim.keymap.set("n", "<esc>", "<cmd>q<cr>", { buffer = true })
-  end,
-})
