@@ -89,6 +89,22 @@ require("lazy").setup(
     },
     { "guns/xterm-color-table.vim" },
     { "airblade/vim-rooter" },
+    { "folke/which-key.nvim",
+      event = "VeryLazy",
+      opts = {
+        preset = "helix",
+        delay = 400,
+      },
+      keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+    },
     { "akinsho/git-conflict.nvim",
       version = "*",
       opts = {
@@ -415,7 +431,9 @@ require("lazy").setup(
 
         -- Command to colorize the current buffer
         vim.api.nvim_create_user_command("BaleiaColorize", function()
-          vim.g.baleia.once(vim.api.nvim_get_current_buf())
+          local buf = vim.api.nvim_get_current_buf()
+          vim.g.baleia.once(buf)
+          vim.defer_fn(function() vim.bo[buf].modified = false end, 100)
         end, { bang = true })
 
         -- Command to show logs
@@ -425,7 +443,9 @@ require("lazy").setup(
         vim.api.nvim_create_autocmd("BufReadPost", {
           pattern = "*.dump",
           callback = function()
-            vim.g.baleia.once(vim.api.nvim_get_current_buf())
+            local buf = vim.api.nvim_get_current_buf()
+            vim.g.baleia.once(buf)
+            vim.defer_fn(function() vim.bo[buf].modified = false end, 100)
           end,
         })
       end,
