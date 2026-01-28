@@ -205,7 +205,10 @@ require("lazy").setup(
           capabilities = capabilities,
           settings = {
             ["rust-analyzer"] = {
-              checkOnSave = { command = "clippy" },
+              checkOnSave = true,
+              check = {
+                command = "clippy",
+              },
               inlayHints = {
                 typeHints = { enable = true },
                 parameterHints = { enable = true },
@@ -534,6 +537,6 @@ vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
     vim.opt_local.signcolumn = "no"
-    vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true })
+    vim.keymap.set("n", "<esc>", "<cmd>q<cr>", { buffer = true })
   end,
 })
