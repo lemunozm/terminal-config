@@ -1,6 +1,9 @@
 -- nvimpager configuration
 -- Use catppuccin mocha theme from Neovim's lazy.nvim plugins
 
+-- Disable less-like keybindings, use normal vim cursor movement
+nvimpager.maps = false
+
 -- Add catppuccin from lazy.nvim plugins to runtimepath
 vim.opt.rtp:prepend(vim.fn.expand("~/.local/share/nvim/lazy/catppuccin"))
 

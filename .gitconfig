@@ -8,7 +8,7 @@
     prune = true
 [core]
     editor = nvim
-	pager = nvimpager
+	pager = nvimpager -p
 	excludesFile = ~/.gitignore
 [commit]
 	gpgSign = true
