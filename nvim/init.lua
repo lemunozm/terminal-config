@@ -549,6 +549,7 @@ vim.opt.termguicolors = true
 -- Keys
 vim.keymap.set("n", "<esc>", vim.cmd.nohlsearch)
 vim.keymap.set("i", "jj", "<esc>")
+vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<leader>w", ":w<cr>")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>d", "\"+d")
