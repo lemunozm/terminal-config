@@ -164,7 +164,7 @@ keybinds clear-defaults=true {
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
         bind "Alt p" { TogglePaneInGroup; }
-        bind "Alt e" { EditScrollbackRaw; }
+        bind "Alt u" { EditScrollbackRaw; }
         bind "Alt Shift p" { ToggleGroupMarking; }
         bind "Alt s" {
             LaunchOrFocusPlugin "session-manager" {
