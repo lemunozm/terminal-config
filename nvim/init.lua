@@ -89,6 +89,12 @@ require("lazy").setup(
     },
     { "guns/xterm-color-table.vim" },
     { "airblade/vim-rooter" },
+    { "akinsho/git-conflict.nvim",
+      version = "*",
+      opts = {
+        default_mappings = false,
+      },
+    },
     { "stevearc/oil.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       keys = {
