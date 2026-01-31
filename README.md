@@ -1,7 +1,7 @@
 # terminal-config
 Tools and configuration to set up a functional and productive **mouse-free terminal environment**
 
-## My setuo consist in the following tools:
+## My setup consist in the following tools with their configuration files:
 - [oh-my-zsh](https://ohmyz.sh/): An easier way to configure your `zsh`.
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k): The best way of configure your prompt.
 - [alacritty](https://alacritty.org/): A multiplatform terminal configurable by a config file, perfect to setup the same configuration among different machines.
@@ -15,3 +15,5 @@ Tools and configuration to set up a functional and productive **mouse-free termi
 - [exa](https://the.exa.website/): A prettier `ls` and `tree` built in rust.
 - [nvimpager](https://github.com/sindrets/diffview.nvim): Use neovim as pager (instead of less)
 - [yazi](https://yazi-rs.github.io/): File explorer and management
+- [aerospace](https://github.com/nikitabobko/AeroSpace): Window management replacing the default MacOS behavior. Util for associate apps to shortcuts.
+
