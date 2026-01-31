@@ -469,6 +469,7 @@ require("lazy").setup(
             vim.opt_local.signcolumn = "no"
             vim.keymap.set("n", "<esc>", "<cmd>q!<cr>", { buffer = true })
             vim.keymap.set("n", "q", "<cmd>q!<cr>", { buffer = true })
+            vim.cmd("normal! G")
           end,
         })
       end,
