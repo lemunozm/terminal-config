@@ -1,5 +1,5 @@
 # terminal-config
-Tools and configuration to set up a functional and productive **mouse-free terminal environment**
+Configuration files to set up a functional and productive **mouse-free terminal environment**
 
 ## My setup consist in the following tools with their configuration files:
 - [oh-my-zsh](https://ohmyz.sh/): An easier way to configure your `zsh`.
@@ -16,4 +16,5 @@ Tools and configuration to set up a functional and productive **mouse-free termi
 - [nvimpager](https://github.com/sindrets/diffview.nvim): Use neovim as pager (instead of less)
 - [yazi](https://yazi-rs.github.io/): File explorer and management
 - [aerospace](https://github.com/nikitabobko/AeroSpace): Window management replacing the default MacOS behavior. Util for associate apps to shortcuts.
+- [karabiner](https://github.com/pqrs-org/Karabiner-Elements): A way to emulate hyper and super-hyper keys (to use in aerospace)
 
