@@ -194,7 +194,7 @@ alt-cmd-ctrl-shift-y = 'move-node-to-workspace Y'
 alt-cmd-ctrl-shift-z = 'move-node-to-workspace Z'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-cmd-tab = 'workspace-back-and-forth'
+alt-cmd-ctrl-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
 alt-cmd-ctrl-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
