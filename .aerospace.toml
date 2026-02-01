@@ -218,6 +218,10 @@ alt-cmd-ctrl-shift-k = ['join-with up', 'mode main']
 alt-cmd-ctrl-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
+if.app-id = "at.obdev.littlesnitch.networkmonitor"
+run = ["move-node-to-workspace 9"]
+
+[[on-window-detected]]
 if.app-id = "org.alacritty"
 run = "move-node-to-workspace A"
 
