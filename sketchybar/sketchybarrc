@@ -5,8 +5,8 @@ FONT="Hack Nerd Font"
 PADDINGS=3
 
 ##### Bar Appearance #####
-sketchybar --bar     height=50                                         \
-                     corner_radius=14                                  \
+sketchybar --bar     height=25                                         \
+                     corner_radius=8                                   \
                      border_width=0                                    \
                      margin=95                                         \
                      blur_radius=0                                     \
@@ -22,8 +22,8 @@ sketchybar --bar     height=50                                         \
                                                                        \
            --default drawing=on                                        \
                      updates=when_shown                                \
-                     icon.font="$FONT:Bold:15.0"                       \
-                     label.font="$FONT:Medium:12.0"                    \
+                     icon.font="$FONT:Bold:11.0"                       \
+                     label.font="$FONT:Medium:10.0"                    \
                      icon.color=0xffffffff                             \
                      label.color=0xffdfe1ea                            \
                      icon.padding_left=$PADDINGS                       \
@@ -33,19 +33,17 @@ sketchybar --bar     height=50                                         \
                      background.padding_right=$PADDINGS                \
                      background.padding_left=$PADDINGS                 \
 
-sketchybar --animate sin 30 --bar y_offset=-100 y_offset=9
+sketchybar --animate sin 30 --bar y_offset=-100 y_offset=0
 
 ##### AeroSpace Event #####
 sketchybar --add event aerospace_workspace_change
 
 ##### Left #####
-. "$ITEM_DIR/system.sh"
+. "$ITEM_DIR/spaces.sh"
 . "$ITEM_DIR/front_app.sh"
 
-##### Center #####
-. "$ITEM_DIR/spaces.sh"
-
 ##### Right #####
+. "$ITEM_DIR/system.sh"
 . "$ITEM_DIR/time.sh"
 . "$ITEM_DIR/sound.sh"
 . "$ITEM_DIR/battery.sh"
