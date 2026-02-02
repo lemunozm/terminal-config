@@ -122,25 +122,11 @@ require("lazy").setup(
         { "<leader>c", "<cmd>NoNeckPain<cr>" },
       },
       opts = {
-        width = 100,
+        width = 110,
         buffers = {
           right = { enabled = false },
         },
       },
-      config = function(_, opts)
-        require("no-neck-pain").setup(opts)
-        local widths = {
-          solidity = 120,
-        }
-        vim.api.nvim_create_autocmd("BufEnter", {
-          callback = function()
-            local state = require("no-neck-pain.state")
-            if not state.enabled then return end
-            local w = widths[vim.bo.filetype] or opts.width
-            vim.cmd("NoNeckPainResize " .. w)
-          end,
-        })
-      end,
     },
     { "akinsho/git-conflict.nvim",
       version = "*",
