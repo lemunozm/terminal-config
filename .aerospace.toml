@@ -141,7 +141,7 @@ alt-cmd-ctrl-6 = 'workspace 6'
 alt-cmd-ctrl-7 = 'workspace 7'
 alt-cmd-ctrl-8 = 'workspace 8'
 alt-cmd-ctrl-9 = 'workspace 9'
-alt-cmd-ctrl-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
+alt-cmd-ctrl-a = 'workspace A'
 alt-cmd-ctrl-b = 'workspace B'
 alt-cmd-ctrl-c = 'workspace C'
 alt-cmd-ctrl-d = 'workspace D'
@@ -235,7 +235,7 @@ run = "move-node-to-workspace E"
 
 [[on-window-detected]]
 if.app-id = "notion.id"
-run = "move-node-to-workspace T"
+run = "move-node-to-workspace O"
 
 [[on-window-detected]]
 if.app-id = "com.apple.Notes"
