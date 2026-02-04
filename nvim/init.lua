@@ -175,6 +175,7 @@ require("lazy").setup(
         vim.g.wintabs_ui_sep_leftmost = ""
         vim.g.wintabs_ui_sep_inbetween = ""
         vim.g.wintabs_ui_sep_rightmost = ""
+        vim.g.wintabs_ignored_filetypes = { "oil" }
       end
     },
     { "hrsh7th/nvim-cmp",
