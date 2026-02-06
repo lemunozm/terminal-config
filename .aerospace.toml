@@ -221,34 +221,40 @@ alt-cmd-ctrl-shift-j = ['join-with down', 'mode main']
 alt-cmd-ctrl-shift-k = ['join-with up', 'mode main']
 alt-cmd-ctrl-shift-l = ['join-with right', 'mode main']
 
+# Float all windows by default
+[[on-window-detected]]
+check-further-callbacks = true
+run = 'layout floating'
+
+# App-specific rules: tile and move to workspace
 [[on-window-detected]]
 if.app-id = "at.obdev.littlesnitch.networkmonitor"
-run = ["move-node-to-workspace 9"]
+run = ["layout tiling", "move-node-to-workspace 9"]
 
 [[on-window-detected]]
 if.app-id = "org.alacritty"
-run = "move-node-to-workspace A"
+run = ["layout tiling", "move-node-to-workspace A"]
 
 [[on-window-detected]]
 if.app-id = "com.google.Chrome"
-run = "move-node-to-workspace E"
+run = ["layout tiling", "move-node-to-workspace E"]
 
 [[on-window-detected]]
 if.app-id = "notion.id"
-run = "move-node-to-workspace O"
+run = ["layout tiling", "move-node-to-workspace O"]
 
 [[on-window-detected]]
 if.app-id = "com.apple.Notes"
-run = "move-node-to-workspace N"
+run = ["layout tiling", "move-node-to-workspace N"]
 
 [[on-window-detected]]
 if.app-id = "com.tinyspeck.slackmacgap"
-run = "move-node-to-workspace S"
+run = ["layout tiling", "move-node-to-workspace S"]
 
 [[on-window-detected]]
 if.app-id = "com.apple.Music"
-run = "move-node-to-workspace M"
+run = ["layout tiling", "move-node-to-workspace M"]
 
 [[on-window-detected]]
 if.app-id = "com.apple.finder"
-run = "move-node-to-workspace F"
+run = ["layout tiling", "move-node-to-workspace F"]
