@@ -593,6 +593,12 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.sol",
   command = "silent !forge fmt %"
 })
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.rs",
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end
+})
 
 --LSP config
 vim.diagnostic.config({
