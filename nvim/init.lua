@@ -118,15 +118,27 @@ require("lazy").setup(
     },
     { "shortcuts/no-neck-pain.nvim",
       version = "*",
+      lazy = false,
       keys = {
         { "<leader>c", "<cmd>NoNeckPain<cr>" },
       },
       opts = {
         width = 110,
+        autocmds = {
+          enableOnVimEnter = true,
+          skipEnteringNoNeckPainBuffer = true,
+        },
         buffers = {
           right = { enabled = false },
         },
       },
+      config = function(_, opts)
+        -- Disable enableOnVimEnter for .dump files
+        if vim.fn.expand("%:e") == "dump" then
+          opts.autocmds.enableOnVimEnter = false
+        end
+        require("no-neck-pain").setup(opts)
+      end,
     },
     { "akinsho/git-conflict.nvim",
       version = "*",
@@ -463,25 +475,20 @@ require("lazy").setup(
         -- Command to show logs
         vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
 
-        -- Automatically colorize .dump files
+        -- Open dump files with no column numbers, colorize, and scroll to bottom
         vim.api.nvim_create_autocmd("BufReadPost", {
           pattern = "*.dump",
           callback = function()
             local buf = vim.api.nvim_get_current_buf()
-            vim.g.baleia.once(buf)
-            vim.defer_fn(function() vim.bo[buf].modified = false end, 100)
-          end,
-        })
-
-        -- Open dump files with no column numbers and easy quit
-        vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
-          pattern = "*.dump",
-          callback = function()
             vim.opt_local.number = false
             vim.opt_local.relativenumber = false
             vim.opt_local.signcolumn = "no"
             vim.keymap.set("n", "q", "<cmd>q!<cr>", { buffer = true })
-            vim.cmd("normal! G")
+            vim.g.baleia.once(buf)
+            vim.defer_fn(function()
+              vim.bo[buf].modified = false
+              vim.cmd("normal! Gzb")
+            end, 100)
           end,
         })
       end,
