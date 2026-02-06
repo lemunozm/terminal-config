@@ -241,7 +241,7 @@ run = ["layout tiling", "move-node-to-workspace E"]
 
 [[on-window-detected]]
 if.app-id = "notion.id"
-run = ["layout tiling", "move-node-to-workspace O"]
+run = ["layout tiling", "move-node-to-workspace W"]
 
 [[on-window-detected]]
 if.app-id = "com.apple.Notes"
