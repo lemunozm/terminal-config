@@ -489,7 +489,7 @@ require("lazy").setup(
             vim.opt_local.signcolumn = "no"
             vim.keymap.set("n", "q", "<cmd>q!<cr>", { buffer = true })
 
-            -- Only keep last 500 lines for performance (unless full reload requested)
+            -- Only keep last 250 lines for performance (unless full reload requested)
             local line_count = vim.api.nvim_buf_line_count(buf)
             local max_lines = 250
             if not full_reload and line_count > max_lines then
@@ -507,6 +507,9 @@ require("lazy").setup(
               vim.cmd("normal! Gzb")
               local height = vim.api.nvim_win_get_height(0)
               vim.cmd("normal! " .. math.floor(height / 2) .. "k")
+              local line = vim.api.nvim_get_current_line()
+              local mid_col = math.floor(#line / 2)
+              vim.api.nvim_win_set_cursor(0, { vim.fn.line('.'), mid_col })
             end, 100)
           end,
         })
