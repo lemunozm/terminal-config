@@ -475,15 +475,32 @@ require("lazy").setup(
         -- Command to show logs
         vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
 
-        -- Open dump files with no column numbers, colorize, and scroll to bottom
+        -- Open dump files with no column numbers, colorize last N lines, scroll to bottom
         vim.api.nvim_create_autocmd("BufReadPost", {
           pattern = "*.dump",
           callback = function()
             local buf = vim.api.nvim_get_current_buf()
+            local filepath = vim.api.nvim_buf_get_name(buf)
+            local full_reload = vim.g.dump_full_reload_path == filepath
+            vim.g.dump_full_reload_path = nil
+
             vim.opt_local.number = false
             vim.opt_local.relativenumber = false
             vim.opt_local.signcolumn = "no"
             vim.keymap.set("n", "q", "<cmd>q!<cr>", { buffer = true })
+
+            -- Only keep last 500 lines for performance (unless full reload requested)
+            local line_count = vim.api.nvim_buf_line_count(buf)
+            local max_lines = 250
+            if not full_reload and line_count > max_lines then
+              vim.api.nvim_buf_set_lines(buf, 0, line_count - max_lines, false, {})
+              -- Add keymap to reload full file
+              vim.keymap.set("n", "R", function()
+                vim.g.dump_full_reload_path = filepath
+                vim.cmd("edit! " .. vim.fn.fnameescape(filepath))
+              end, { buffer = true, desc = "Reload full dump file" })
+            end
+
             vim.g.baleia.once(buf)
             vim.defer_fn(function()
               vim.bo[buf].modified = false
