@@ -488,6 +488,8 @@ require("lazy").setup(
             vim.defer_fn(function()
               vim.bo[buf].modified = false
               vim.cmd("normal! Gzb")
+              local height = vim.api.nvim_win_get_height(0)
+              vim.cmd("normal! " .. math.floor(height / 2) .. "k")
             end, 100)
           end,
         })
